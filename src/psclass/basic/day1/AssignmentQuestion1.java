@@ -1,5 +1,8 @@
 package psclass.basic.day1;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 /**
  * Given an array of integers, return indices of the two numbers such that they
  * add up to a specific target. You may assume that each input would have
@@ -36,9 +39,36 @@ public class AssignmentQuestion1 {
 		return result;
 	}
 
+	/**
+	 * DP : One Pass hashtable method
+	 * Time Complexity : O(n)
+	 * @param array
+	 * @param target
+	 * @return
+	 */
+	private static int[] findPairTwo(int[] array, int target) {
+		int[] result = { -1, -1 };
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		int lookup = 0;
+		Integer lookup2 = null;
+		for (int i = 0; i < array.length; i++) {
+			lookup = target - array[i];
+			lookup2 = map.get(lookup);
+			if (lookup2 == null) {
+				map.put(array[i], i);
+			} else {
+				result[0] = lookup2;
+				result[1] = i;
+				return result;				
+			}
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) {
-		int[] array = { 2, 7, 11, 15 };
-		show(findPairOne(array, 9));
+		int[] array = { -1, 2, 11, 15 };
+		show(findPairOne(array, 10));
+		show(findPairTwo(array, 10));
 	}
 	
 	/**
