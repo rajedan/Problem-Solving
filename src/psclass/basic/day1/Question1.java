@@ -14,6 +14,7 @@ public class Question1 {
 	
 	/**
 	 * Naive approach
+	 * Time Complexity : O(n^2)
 	 * @param array
 	 * @return
 	 */
@@ -29,6 +30,12 @@ public class Question1 {
 		return -1;
 	}
 	
+	/**
+	 * Another naive approach
+	 * Time Complexity : O(n log2(n))
+	 * @param array
+	 * @return
+	 */
 	private static int findDuplicateIdeaTwo(int[] array) {
 		Arrays.sort(array);
 		for (int i = 0; i < (array.length-1); i++) {
@@ -40,10 +47,12 @@ public class Question1 {
 		return -1;
 	}
 	
-	private static int findDuplicateIdeaThree(int[] array) {
-		return -1;
-	}
-	
+	/**
+	 * Best Approach
+	 * Time Complexity : O(n)
+	 * @param array
+	 * @return
+	 */
 	private static int findDuplicateIdeaFour(int[] array) {
 		int index = 0;
 		for (int i = 0; i < array.length; i++) {
@@ -59,7 +68,7 @@ public class Question1 {
 	}
 	
 	public static void main(String[] args) {
-		int[] array = {1,4,2,3,4};
+		int[] array = {1,4,2,3,4,5,5};
 		System.out.println(findDuplicateIdeaOne(array));
 		System.out.println(findDuplicateIdeaTwo(array));
 		System.out.println(findDuplicateIdeaFour(array));
