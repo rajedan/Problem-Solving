@@ -58,7 +58,7 @@ public class Question1 {
 		for (int i = 0; i < array.length; i++) {
 			index = Math.abs(array[i]);
 			if (array[index] < 0) {
-				return Math.abs(array[index]);
+				return index;
 			} else {
 				array[index] = -array[index];
 			}
@@ -68,7 +68,7 @@ public class Question1 {
 	}
 	
 	public static void main(String[] args) {
-		int[] array = {1,4,2,3,4,5,5};
+		int[] array = {1,4,2,3,6,2,5};
 		System.out.println(findDuplicateIdeaOne(array));
 		System.out.println(findDuplicateIdeaTwo(array));
 		System.out.println(findDuplicateIdeaFour(array));
