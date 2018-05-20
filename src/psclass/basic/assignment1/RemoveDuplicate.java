@@ -10,6 +10,13 @@ import java.util.Arrays;
  */
 
 public class RemoveDuplicate {
+	
+	/**
+	 * Time  : O(n)
+	 * Space : O(1)
+	 * @param in
+	 * @return
+	 */
 	public static int removeDuplicates(int[] in) {
 		 if (in == null || in.length == 0) {
 	            return 0;
