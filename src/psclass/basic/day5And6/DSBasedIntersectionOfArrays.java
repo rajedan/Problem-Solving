@@ -100,6 +100,44 @@ public class DSBasedIntersectionOfArrays {
 		return common;
 	}
 	
+	/**
+	 * https://leetcode.com/problems/intersection-of-two-arrays/description/
+	 * Time  : O(m+n)
+	 * Space : O(m) or O(n) whichever is minimum
+	 * @param in1
+	 * @param in2
+	 * @return
+	 */
+	public static int[] intersection(int[] in1, int[] in2) {
+		int m = in1.length, n = in2.length, flag = 0;
+		int[] result = new int[m < n ? m : n];
+		HashSet<Integer> set = new HashSet<Integer>();
+		if (m < n) {
+			for (int i = 0; i < m; i++) {
+				set.add(in1[i]);
+			}
+			for (int i = 0; i < n; i++) {
+				if (set.contains(in2[i])) {
+					result[flag] = in2[i];
+					flag++;
+					set.remove(in2[i]);
+				}
+			}
+		} else {
+			for (int i = 0; i < n; i++) {
+				set.add(in2[i]);
+			}
+			for (int i = 0; i < m; i++) {
+				if (set.contains(in1[i])) {
+					result[flag] = in1[i];
+					flag++;
+					set.remove(in1[i]);
+				}
+			}
+		}
+		return Arrays.copyOf(result, flag);
+	}
+
 	public static void main(String[] args) {
 		int[] in1 = {5,6,7,8,10,20,10,10};
 		int[] in2 = {2,6,9,10,15,10};
@@ -107,6 +145,6 @@ public class DSBasedIntersectionOfArrays {
 		System.out.println(findIntersection2(in1, in2));
 		System.out.println(findIntersection3(in1, in2));
 		System.out.println(findIntersection4(in1, in2));
-		
+		System.out.println(Arrays.toString(intersection(in1, in2)));
 	}
 }
