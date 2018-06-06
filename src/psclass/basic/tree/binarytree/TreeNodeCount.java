@@ -6,6 +6,7 @@ public class TreeNodeCount {
 	 * Time  : O(n)
 	 * Space : O(h)
 	 * where h is height of the Tree
+	 * Note that the space it takes is stack space not heap space
 	 * @param root
 	 * @return
 	 */
