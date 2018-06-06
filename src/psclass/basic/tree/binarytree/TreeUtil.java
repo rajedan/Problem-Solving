@@ -30,6 +30,8 @@ public class TreeUtil {
 		tmp.left.right = new TreeNode(5);
 		tmp.right.left = new TreeNode(6);
 		tmp.right.right = new TreeNode(7);
+		tmp.right.right.left = new TreeNode(72);
+		tmp.right.right.left.right = new TreeNode(92);
 		return root;
 	}
 	
