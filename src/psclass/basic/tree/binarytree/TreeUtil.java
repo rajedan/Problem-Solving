@@ -62,10 +62,6 @@ public class TreeUtil {
 			return;
 		}
 		auxDisplay(root, 0, NodeType.ROOT.value());
-		//int noOfSpace = 3;
-		//System.out.println(root.value+"("+NodeType.ROOT.name()+")");
-		//auxDisplay(root.left, noOfSpace, "L");
-		//auxDisplay(root.right, noOfSpace, "R");
 	}
 	
 	private static void auxDisplay(TreeNode node, int noOfSpace, String nodeType) {
@@ -82,7 +78,6 @@ public class TreeUtil {
 
 	public static void main(String[] args) {
 		TreeNode root = getBinaryTree();
-		//display1(root);
 		display2(root);
 	}
 }

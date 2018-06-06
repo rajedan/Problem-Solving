@@ -23,7 +23,8 @@ public class AssignmentQuestion2 {
 	 * @return
 	 */
 	public int[] twoSum(int[] numbers, int target) {
-		
+		int[] result = {};
+		return result;
 	}
 	
 	public static void main(String[] args) {
