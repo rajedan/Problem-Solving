@@ -1,13 +1,18 @@
 package psclass.basic.tree.binarytree;
 
+/**
+ * Represents a Binary Tree Node
+ * @author rajesh
+ *
+ */
 public class TreeNode {
-	Integer value;
-	TreeNode left;
-	TreeNode right;
+	public Integer value;
+	public TreeNode left;
+	public TreeNode right;
 	
-	TreeNode() {}
+	public TreeNode() {}
 	
-	TreeNode(Integer value) {
+	public TreeNode(Integer value) {
 		this.value = value;
 	}
 	TreeNode(Integer value, TreeNode left, TreeNode right) {
