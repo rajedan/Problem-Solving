@@ -55,11 +55,31 @@ public class SerDeser {
 		node.right = auxDeSerialize1(queue);
 		return node;
 	}
-
+	/**********Another approach of serialization and De-serialization************/
+	public static String serialize2(TreeNode root) {
+		Queue<TreeNode> queue = new LinkedList<TreeNode>();
+		StringBuilder sb = new StringBuilder();
+		queue.add(root);
+		TreeNode tmp = null;
+		while (!queue.isEmpty()) {
+			tmp = queue.remove();
+			if (tmp == null) {
+				sb.append("#,");
+				continue;
+			} else {
+				sb.append(tmp.value+",");
+				queue.add(root.left);
+				queue.add(root.right);
+			}
+		}
+		return sb.toString();
+	}
 	public static void main(String[] args) {
 		TreeNode root = TreeUtil.getBinaryTree();
 		TreeUtil.display2(root);
-		String serStr1 = serialize1(root);
-		TreeUtil.display2(deSerialize1(serStr1));
+		//String serStr1 = serialize1(root);
+		//TreeUtil.display2(deSerialize1(serStr1));
+		String str2 = serialize2(root);
+		System.out.println(str2);
 	}
 }
