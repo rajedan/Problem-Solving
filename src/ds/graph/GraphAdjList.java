@@ -2,6 +2,7 @@ package ds.graph;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * This class represents a un-directed Graph
@@ -30,6 +31,30 @@ public class GraphAdjList {
 		graph.get(to).add(from);
 	}
 
+	public void dfs() {
+		boolean[] visitedNodes = new boolean[graph.size()];
+		int unconnectedGraphs = 0;
+		for (int i = 0; i < graph.size(); i++) {
+			if (!visitedNodes[i]) {
+				unconnectedGraphs++;
+				this.dfsHelper(i, visitedNodes);
+			}
+		}
+		System.out.print("unconnectedGraphs: " + unconnectedGraphs);
+	}
+
+	private void dfsHelper(int startNode, boolean[] visitedNodes) {
+		visitedNodes[startNode] = Boolean.TRUE;
+		System.out.print(startNode + " ");
+		int idx = 0;
+		for (int i = 0; i < graph.get(startNode).size(); i++) {
+			int tempNode = graph.get(startNode).get(i);
+			if (!visitedNodes[tempNode]) {
+				dfsHelper(tempNode, visitedNodes);
+			}
+		}
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -43,9 +68,14 @@ public class GraphAdjList {
 
 	public static void main(String[] args) {
 		GraphAdjList unDirectedGraph = new GraphAdjList(5);
-		unDirectedGraph.addEdge(1, 2);
+		//unDirectedGraph.addEdge(1, 2);
 		unDirectedGraph.addEdge(2, 3);
 		unDirectedGraph.addEdge(1, 4);
+		unDirectedGraph.addEdge(1, 3);
+		unDirectedGraph.addEdge(3, 4);
+
 		System.out.println(unDirectedGraph);
+
+		unDirectedGraph.dfs();
 	}
 }
