@@ -3,6 +3,8 @@ package ds.graph;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 /**
  * This class represents a un-directed Graph
@@ -40,7 +42,7 @@ public class GraphAdjList {
 				this.dfsHelper(i, visitedNodes);
 			}
 		}
-		System.out.print("unconnectedGraphs: " + unconnectedGraphs);
+		System.out.println("unconnectedGraphs: " + unconnectedGraphs);
 	}
 
 	private void dfsHelper(int startNode, boolean[] visitedNodes) {
@@ -66,16 +68,52 @@ public class GraphAdjList {
 				'}';
 	}
 
+	public void dfsIterative() {
+		boolean[] visited = new boolean[graph.size()];
+		AtomicInteger count = new AtomicInteger();
+		IntStream.range(0, graph.size()).forEachOrdered(
+				e -> {
+					if (!visited[e]) {
+						List<Integer> unconnectedGraphNodes = new ArrayList<Integer>();
+						dfsIterativeHelper(e, visited, unconnectedGraphNodes);
+						count.getAndIncrement();
+						System.out.println();
+						System.out.println(count + "th un-connected graph nodes: " + unconnectedGraphNodes);
+					}
+				}
+		);
+		System.out.println("total un-connected components: " + count);
+	}
+
+	public void dfsIterativeHelper(int startNode, boolean[] visited, List<Integer> unconnectedGraphNodes) {
+		Stack<Integer> bucket = new Stack<Integer>();
+		bucket.push(startNode);
+		while (!bucket.empty()) {
+			int tempNode = bucket.pop();
+			if (!visited[tempNode]) {
+				System.out.print(tempNode + " ");
+				unconnectedGraphNodes.add(tempNode);
+			}
+			visited[tempNode] = Boolean.TRUE;
+			graph.get(tempNode).forEach(e -> {
+				if (!visited[e])
+					bucket.push(e);
+			});
+		}
+	}
+
 	public static void main(String[] args) {
 		GraphAdjList unDirectedGraph = new GraphAdjList(5);
 		//unDirectedGraph.addEdge(1, 2);
 		unDirectedGraph.addEdge(2, 3);
-		unDirectedGraph.addEdge(1, 4);
-		unDirectedGraph.addEdge(1, 3);
-		unDirectedGraph.addEdge(3, 4);
+//		unDirectedGraph.addEdge(1, 4);
+//		unDirectedGraph.addEdge(1, 3);
+//		unDirectedGraph.addEdge(3, 4);
 
 		System.out.println(unDirectedGraph);
 
 		unDirectedGraph.dfs();
+		System.out.println("--------------------------------------");
+		unDirectedGraph.dfsIterative();
 	}
 }
