@@ -102,6 +102,13 @@ public class GraphAdjList {
 		}
 	}
 
+	public void bfs() {
+		/*boolean[] visited = new boolean[graph.size()];
+		for (int i = 0; i < graph.size(); i++) {
+			bfsHelper
+		}*/
+	}
+
 	public static void main(String[] args) {
 		GraphAdjList unDirectedGraph = new GraphAdjList(5);
 		//unDirectedGraph.addEdge(1, 2);

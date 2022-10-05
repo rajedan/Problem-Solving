@@ -15,6 +15,7 @@ public class ZeroOneKnapSack {
 
 		maxProfit = findMaxProfitWithBottomUp(wt, val, w);
 		System.out.println(maxProfit);
+		System.out.println(practice2(wt, val, w));
 	}
 
 	public static int findMaxProfit(int[] wt, int[] val, int w) {
@@ -33,37 +34,31 @@ public class ZeroOneKnapSack {
 
 		int itemWt = wt[n - 1];
 		int itemV = val[n - 1];
-		if (itemWt > w)
-			return bucket[n][w] = findMaxProfitHelper(wt, val, w, n - 1, bucket);
+		if (itemWt > w) return bucket[n][w] = findMaxProfitHelper(wt, val, w, n - 1, bucket);
 
-		return bucket[n][w] = Math.max((itemV + findMaxProfitHelper(wt, val, w - itemWt, n - 1, bucket)),
-				findMaxProfitHelper(wt, val, w, n - 1, bucket));
+		return bucket[n][w] = Math.max((itemV + findMaxProfitHelper(wt, val, w - itemWt, n - 1, bucket)), findMaxProfitHelper(wt, val, w, n - 1, bucket));
 	}
 
 	public static int findMaxProfitWithBottomUp(int[] wt, int[] val, int w) {
 		int n = wt.length;
-		int[][] mem = new int[n+1][w+1];
+		int[][] mem = new int[n + 1][w + 1];
 
 		//initialization
-		for (int i = 0; i < n+1; i++) {
-			for (int j = 0; j < w+1; j++) {
-				if(i==0 || j ==0)
-					mem[i][j] = 0;
+		for (int i = 0; i < n + 1; i++) {
+			for (int j = 0; j < w + 1; j++) {
+				if (i == 0 || j == 0) mem[i][j] = 0;
 			}
 		}
 
 		//Bottom-Up process
 
-		for (int i = 1; i < n+1; i++) {
-			for (int j = 1; j < w+1; j++) {
-				if (wt[i-1] > j) {
+		for (int i = 1; i < n + 1; i++) {
+			for (int j = 1; j < w + 1; j++) {
+				if (wt[i - 1] > j) {
 					//do not include
-					mem[i][j] = mem[i-1][j];
+					mem[i][j] = mem[i - 1][j];
 				} else {
-					mem[i][j] = Math.max(
-							mem[i-1][j],
-							val[i-1]+mem[i-1][j-wt[i-1]]
-					);
+					mem[i][j] = Math.max(mem[i - 1][j], val[i - 1] + mem[i - 1][j - wt[i - 1]]);
 				}
 			}
 		}
@@ -72,4 +67,38 @@ public class ZeroOneKnapSack {
 		}
 		return mem[n][w];
 	}
+
+	public static int practice2(int[] wt, int[] val, int w) {
+		/**
+		 * int[] wt = {1, 3, 4, 5};
+		 * int[] val = {1, 4, 5, 7};
+		 * int w = 7;
+		 */
+		int n = wt.length;
+		int[][] mem = new int[n + 1][w + 1];
+
+		for (int i = 0; i <= n; i++) {
+			for (int j = 0; j <= w; j++) {
+				if (i == 0 || j == 0) mem[i][j] = 0;
+				else mem[i][j] = -1;
+			}
+		}
+		int tempW = w;
+		for (int i = 1; i < n + 1; i++) {
+			for (int j = 1; j < w + 1; j++) {
+				if (wt[i - 1] > j) {
+					mem[i][j] = mem[i - 1][j];
+				} else {
+					mem[i][j] = Math.max(val[i - 1] + mem[i - 1][j - wt[i - 1]], mem[i - 1][j]);
+				}
+			}
+		}
+		for (int[] ints : mem) {
+			System.out.println(Arrays.toString(ints));
+		}
+		return mem[n][w];
+	}
 }
+/**
+ * mem[1][1]
+ */
